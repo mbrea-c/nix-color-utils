@@ -36,6 +36,8 @@
 
   mapColors = lib.attrsets.mapAttrs (_: hl:
     lib.attrsets.mapAttrs (key: value:
-      if key == "fg" || key == "bg" || key == "sp" then "#${value}" else value)
-    hl);
+      if key == "fg" || key == "bg" || key == "sp" then
+        "#${toString value}"
+      else
+        value) hl);
 }

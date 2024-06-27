@@ -1,4 +1,4 @@
-{ lib, ... }: {
+{ ... }: {
   fromBase16 = { palette, ... }: rec {
     color0 = palette.base00;
     color1 = palette.base08;
@@ -30,12 +30,14 @@
   };
 
   listMax = list:
-    lib.foldl (a: b: if a > b then a else b) (builtins.elemAt list 0) list;
+    builtins.foldl' (a: b: if a > b then a else b) (builtins.elemAt list 0)
+    list;
   listMin = list:
-    lib.foldl (a: b: if a < b then a else b) (builtins.elemAt list 0) list;
+    builtins.foldl' (a: b: if a < b then a else b) (builtins.elemAt list 0)
+    list;
 
-  mapColors = lib.attrsets.mapAttrs (_: hl:
-    lib.attrsets.mapAttrs (key: value:
+  mapColors = builtins.mapAttrs (_: hl:
+    builtins.mapAttrs (key: value:
       if key == "fg" || key == "bg" || key == "sp" then
         "#${toString value}"
       else

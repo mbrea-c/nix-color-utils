@@ -38,8 +38,6 @@
 
   mapColors = builtins.mapAttrs (_: hl:
     builtins.mapAttrs (key: value:
-      if key == "fg" || key == "bg" || key == "sp" then
-        "#${toString value}"
-      else
-        value) hl);
+      if key == "fg" || key == "bg" || key == "sp" then "#${value}" else value)
+    hl);
 }

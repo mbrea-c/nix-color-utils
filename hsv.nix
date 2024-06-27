@@ -51,8 +51,8 @@ in rec {
         / 6;
     in { inherit h s v; };
 
+  from = hsv: rgb.from (HSVToRGB hsv);
 
-  from = hsv: rgb.to (HSVToRGB hsv);
   darken = ratio: color:
     let
       hsv = to color;

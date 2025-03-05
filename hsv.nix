@@ -114,4 +114,18 @@ in rec {
 
   highlight = colorscheme: ratio: color:
     if isDark colorscheme then lighten ratio color else darken ratio color;
+
+  /**
+   Will produce a color with value of color a, but hue and saturation of color
+   b.
+  */
+  matchValue = a: b: let 
+      aHsv = to a;
+      bHsb = to b;
+    in
+      from {
+        h = bHsb.h;
+        s = bHsb.s;
+        v = aHsv.v;
+      };
 }

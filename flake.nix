@@ -9,10 +9,12 @@
     };
   };
 
-  outputs = { nixpkgs-lib, nix-colors, ... }: {
-    lib = (import ./lib.nix) {
-      lib = nixpkgs-lib.lib;
-      inherit nix-colors;
+  outputs =
+    { nixpkgs-lib, nix-colors, ... }:
+    {
+      lib = (import ./lib.nix) {
+        lib = nixpkgs-lib.lib;
+        inherit nix-colors;
+      };
     };
-  };
 }

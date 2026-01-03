@@ -181,9 +181,9 @@ rec {
   rgbToHexrgb =
     rgbValue:
     let
-      r = util.decToHex (util.floatToByte rgbValue.r);
-      g = util.decToHex (util.floatToByte rgbValue.g);
-      b = util.decToHex (util.floatToByte rgbValue.b);
+      r = util.byteToHex (util.floatToByte rgbValue.r);
+      g = util.byteToHex (util.floatToByte rgbValue.g);
+      b = util.byteToHex (util.floatToByte rgbValue.b);
     in
     "${r}${g}${b}";
   hsvToHexrgb = color: color |> hsvToRgb |> rgbToHexrgb;

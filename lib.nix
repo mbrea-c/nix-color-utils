@@ -51,7 +51,7 @@ rec {
       key: color: if key == "fg" || key == "bg" || key == "sp" then compileNeovimColor color else color
     ) highlights
   );
-  compileNeovimColor = color: if color == builtins.null then builtins.null else color.hexstring color;
+  compileNeovimColor = c: if c == builtins.null then builtins.null else color.hexstring c;
 
   compileGtkCss =
     { palette, ... }:

@@ -21,22 +21,22 @@ rec {
   isDark = { palette, ... }: (ensureHsv palette.base00).value.v < 0.5;
   hsvMix =
     ratio: left: right:
-    makeHsv (hsv.mix ratio ((ensureHsv |> extractValue) left) ((ensureHsv |> extractValue) right));
+    makeHsv (hsv.mix ratio (left |> ensureHsv |> extractValue) (right |> ensureHsv |> extractValue));
   hsvDarken = ratio: hsvOperation (hsv.darken ratio);
   hsvLighten = ratio: hsvOperation (hsv.lighten ratio);
   hsvDesaturate = ratio: hsvOperation (hsv.desaturate ratio);
   hsvSaturate = ratio: hsvOperation (hsv.saturate ratio);
   hsvMatchValue =
-    a: b: makeHsv (hsv.matchValue ((ensureHsv |> extractValue) a) ((ensureHsv |> extractValue) b));
+    a: b: makeHsv (hsv.matchValue (a |> ensureHsv |> extractValue) (b |> ensureHsv |> extractValue));
 
-  hsvOperation = operation: ensureHsv |> extractValue |> operation |> makeHsv;
+  hsvOperation = operation: color: color |> ensureHsv |> extractValue |> operation |> makeHsv;
 
   rgbMix =
     ratio: left: right:
-    makeRgb (rgb.mix ratio ((ensureRgb |> extractValue) left) ((ensureRgb |> extractValue) right));
+    makeRgb (rgb.mix ratio (left |> ensureRgb |> extractValue) (right |> ensureRgb |> extractValue));
 
   # Convenience methods
-  hexstring = color: "#${(ensureHexrgb |> extractValue) color}";
+  hexstring = color: "#${color |> ensureHexrgb |> extractValue}";
 
   # Conversion methods
 
@@ -176,7 +176,7 @@ rec {
     {
       inherit r g b;
     };
-  hexrgbToHsv = hexrgbToRgb |> rgbToHsv;
+  hexrgbToHsv = color: color |> hexrgbToRgb |> rgbToHsv;
 
   rgbToHexrgb =
     rgbValue:
@@ -186,5 +186,5 @@ rec {
       b = util.decToHex (util.floatToByte rgbValue.b);
     in
     "${r}${g}${b}";
-  hsvToHexrgb = hsvToRgb |> rgbToHexrgb;
+  hsvToHexrgb = color: color |> hsvToRgb |> rgbToHexrgb;
 }

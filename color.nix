@@ -36,7 +36,7 @@ rec {
     makeRgb (rgb.mix ratio ((ensureRgb |> extractValue) left) ((ensureRgb |> extractValue) right));
 
   # Convenience methods
-  hexstring = "#${ensureHexrgb |> extractValue}";
+  hexstring = color: "#${(ensureHexrgb |> extractValue) color}";
 
   # Conversion methods
 

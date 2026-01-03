@@ -2,7 +2,7 @@ args@{ lib, nix-colors, ... }:
 let
   util = (import ./util.nix) args;
   hsv = (import ./variants/hsv.nix) args;
-  rgb = (import ./variants/hsv.nix) args;
+  rgb = (import ./variants/rgb.nix) args;
 in
 rec {
   # Constructors

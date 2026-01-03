@@ -7,8 +7,8 @@ rec {
     listMax
     listMin
     ;
-  hsv = (import ./hsv.nix) args;
-  rgb = (import ./hsv.nix) args;
+  hsv = (import ./variants/hsv.nix) args;
+  rgb = (import ./variants/rgb.nix) args;
   color = (import ./color.nix) args;
 
   fromBase16 =
